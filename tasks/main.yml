@@ -53,68 +53,68 @@
       group={{ omdistro_site }}
       backup=yes
 
-- name: template timeperiods.cfg
-  template: >
-      src=timeperiods.cfg.j2
-      dest=/opt/omd/sites/{{ omdistro_site }}/etc/nagios/conf.d/timeperiods.cfg
-      owner={{ omdistro_site }}
-      group={{ omdistro_site }}
-      backup=yes
+#- name: template timeperiods.cfg
+#  template: >
+#      src=timeperiods.cfg.j2
+#      dest=/opt/omd/sites/{{ omdistro_site }}/etc/nagios/conf.d/timeperiods.cfg
+#      owner={{ omdistro_site }}
+#      group={{ omdistro_site }}
+#     backup=yes
 
-- name: template hosts.mk
-  template: >
-      src=hosts.mk.j2
-      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/conf.d/hosts.mk
-      owner={{ omdistro_site }}
-      group={{ omdistro_site }}
-      backup=yes
-  notify: cmk inventory
+#- name: template hosts.mk
+#  template: >
+#      src=hosts.mk.j2
+#      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/conf.d/hosts.mk
+#      owner={{ omdistro_site }}
+#      group={{ omdistro_site }}
+#      backup=yes
+#  notify: cmk inventory
 
-- name: template groups.mk
-  template: >
-      src=groups.mk.j2
-      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/conf.d/groups.mk
-      owner={{ omdistro_site }}
-      group={{ omdistro_site }}
-      backup=yes
-  notify: cmk reload
+#- name: template groups.mk
+#  template: >
+#      src=groups.mk.j2
+#      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/conf.d/groups.mk
+#      owner={{ omdistro_site }}
+#      group={{ omdistro_site }}
+#      backup=yes
+#  notify: cmk reload
 
-- name: template main.mk
-  template: >
-      src=main.mk.j2
-      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/main.mk
-      owner={{ omdistro_site }}
-      group={{ omdistro_site }}
-      backup=yes
-  notify: cmk reload
+#- name: template main.mk
+#  template: >
+#      src=main.mk.j2
+#      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/main.mk
+#      owner={{ omdistro_site }}
+#      group={{ omdistro_site }}
+#      backup=yes
+#  notify: cmk reload
 
-- name: stat wato contacts.mk
-  stat: path=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/conf.d/wato/contacts.mk
-  register: stat_wato_contacts
+#- name: stat wato contacts.mk
+#  stat: path=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/conf.d/wato/contacts.mk
+# register: stat_wato_contacts
 
-- name: template wato contacts.mk if does not exist
-  template: >-
-      src=wato_contacts.mk.j2
-      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/conf.d/wato/contacts.mk
-      owner={{ omdistro_site }}
-      group={{ omdistro_site }}
-      backup=yes
-  when: not stat_wato_contacts.stat.exists
-  notify: cmk reload
+#- name: template wato contacts.mk if does not exist
+#  template: >-
+#      src=wato_contacts.mk.j2
+#      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/conf.d/wato/contacts.mk
+#      owner={{ omdistro_site }}
+#      group={{ omdistro_site }}
+#      backup=yes
+#  when: not stat_wato_contacts.stat.exists
+#  notify: cmk reload
 
-- name: stat multisite wato users.mk
-  stat: path=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/multisite.d/wato/users.mk
-  register: stat_wato_users
+#- name: stat multisite wato users.mk
+#  stat: path=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/multisite.d/wato/users.mk
+#  register: stat_wato_users
 
-- name: template users.mk if does not exist
-  template: >-
-      src=wato_users.mk.j2
-      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/multisite.d/wato/users.mk
-      owner={{ omdistro_site }}
-      group={{ omdistro_site }}
-      backup=yes
-  when: not stat_wato_users.stat.exists
+#- name: template users.mk if does not exist
+#  template: >-
+#      src=wato_users.mk.j2
+#      dest=/opt/omd/sites/{{ omdistro_site }}/etc/check_mk/multisite.d/wato/users.mk
+#      owner={{ omdistro_site }}
+#      group={{ omdistro_site }}
+#      backup=yes
+#  when: not stat_wato_users.stat.exists
 
-- name: scan for parent/child relationships
-  command: su -c "cmk --scan-parents" -l {{omdistro_site}}
-  when: omdistro_scan_parents
+#- name: scan for parent/child relationships
+#  command: su -c "cmk --scan-parents" -l {{omdistro_site}}
+#  when: omdistro_scan_parents
